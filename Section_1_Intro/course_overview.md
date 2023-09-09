@@ -32,6 +32,14 @@ Because boolean logic can be implemented with transistors, various digital compo
     <figcaption>PLB</figcaption>
 </figure>
 
+Finally, ICs are transitors in a "nice reliable package". This goes into fabrication, and I don't know much about it. What I think I know:
+- Wafers start as layered n and p doped silicon
+- The IC design is "painted" onto the wafer
+- The painted wafer is exposed to special UV light. The light reacts with the paint and etches away material
+- Repeat for all layers?
+
+The result is an etched wafer that has transitors configured according to the specification.
+
 # Reference
 
 [1] https://en.wikipedia.org/wiki/Field-programmable_gate_array<br>
