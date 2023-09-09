@@ -6,15 +6,18 @@ So about those transistors -- Course overview. Describe how FPGAs are buildable 
 
 Transistors are used to control current. There are several types (MOSFETS, BJTs, etc), however digital electronics typically use MOSFETS. MOSFETS can be positively doped (PMOS) or negatively doped (NMOS). A complementary mosfet (CMOS) is a configuation of both NMOS and PMOS transistors such that a transistor, rather than a resistor, is used for the load. This imporoves power usage and performance. Here are a few CMOS logic gates:
 
-<figure>
-    <img src="https://www.elprocus.com/wp-content/uploads/CMOS-Inverter-Circuit.png" width="200" height="200">
-    <figcaption>NOT</figcaption>
-</figure>
 
-<figure>
-    <img src="https://i.stack.imgur.com/LOYtw.png" width="200" height="200">
-    <figcaption>AND</figcaption>
-</figure>
+<div style="display: flex; justify-content: space-between;">
+    <figure>
+        <img src="https://www.elprocus.com/wp-content/uploads/CMOS-Inverter-Circuit.png" width="200" height="200">
+        <figcaption>NOT</figcaption>
+    </figure>
+    <figure>
+        <img src="https://i.stack.imgur.com/LOYtw.png" width="200" height="200">
+        <figcaption>AND</figcaption>
+    </figure>
+</div>
+
 
 Because boolean logic can be implemented with transistors, various digital components can be built, such as LookUp Tables (LUTs). LUTs map a set of inputs to a set of outputs. They can be static or reconfigurable. In FPGAs, they are reconfigurable. LUTs are a core part of the programmable logic blocks (PLBs), which comprise an FPGA. Using LUTs, PLBs can change their outputs. In FPGAs, PLBs are connected via a programmable connection matrix, tying together the inputs/outputs of PLBs. Between PLBs and the connection matrix, FPGAs can implement complex digital ciruits.
 
