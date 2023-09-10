@@ -16,7 +16,7 @@ generate
     */
     localparam real _br = BR;
     localparam real _clkf = CLKF;
-    localparam real _clk_div = clkf/(br*2);
+    localparam real _clk_div = _clkf/(_br*2);
 
     initial if (_clk_div != $floor(_clk_div)) $fatal(1, "clock divisor must be whole number");
     initial if (_clk_div == 0) $fatal(1, "clock divisor must be >0");
