@@ -15,14 +15,16 @@ reg [$clog2(CLK_DIV)-1:0] counter = 0;
 reg int_bclk;
 
 always @(posedge clk or posedge reset) begin
-    if (counter >= CLK_DIV) $fatal(1, "counter overflow!");
     if (reset) begin
-        counter = 0;
-        int_bclk = 0;
+        counter <= 0;
+        int_bclk <= 0;
     end else if (counter == CLK_DIV-1) begin
-        counter = 0;
-        int_bclk = ~int_bclk;
-    end else counter = counter + 1;
+        counter <= 0;
+        int_bclk <= ~int_bclk;
+    end else begin
+        counter <= counter + 1;
+        if (counter >= CLK_DIV) $fatal(1, "counter overflow!");
+    end
 end
 
 assign bclk = int_bclk;
