@@ -14,14 +14,14 @@ generate
      * in the CLK_DIV computation and validation. If someone knows how to achieve this,
      * please tell me.
     */
-    localparam real br = BR;
-    localparam real clkf = CLKF;
-    localparam real clk_div = clkf/(br*2);
+    localparam real _br = BR;
+    localparam real _clkf = CLKF;
+    localparam real _clk_div = clkf/(br*2);
 
-    initial if (clk_div != $floor(clk_div)) $fatal(1, "clock divisor must be whole number");
-    initial if (clk_div == 0) $fatal(1, "clock divisor must be >0");
+    initial if (_clk_div != $floor(_clk_div)) $fatal(1, "clock divisor must be whole number");
+    initial if (_clk_div == 0) $fatal(1, "clock divisor must be >0");
     
-    localparam CLK_DIV = clk_div;
+    localparam CLK_DIV = _clk_div;
 endgenerate
 
 reg [$clog2(CLK_DIV)-1:0] counter = 0;
