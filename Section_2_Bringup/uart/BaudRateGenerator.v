@@ -4,13 +4,28 @@ module BaudRateGenerator#(parameter BR=0, parameter CLKF=0)(
     output wire bclk
 );
 
-if (BR == 0 || CLKF == 0) initial $fatal(1, "baud rate nor clock frequency can be 0");
-if (CLKF < BR*2) initial $fatal(1, "clock frequency must be atleast double the baud rate");
-if (CLKF%(BR*2) != 0) initial $fatal(1, "The clock divisor must a whole number");
+// parameter asserts and clock divisor calculation
+generate
+    if (BR == 0) initial $fatal(1, "baud rate cannot be 0");
+    if (CLKF == 0) initial $fatal(1, "clock frequency cannot be 0");
 
-localparam CLK_DIV = CLKF / (BR*2);
+    /* I would really love these to be scoped to the generate block. I don't
+     * want them leaking into sythesizable code. They only exist as intermediaries
+     * in the CLK_DIV computation and validation. If someone knows how to achieve this,
+     * please tell me.
+    */
+    localparam real br = BR;
+    localparam real clkf = CLKF;
+    localparam real clk_div = clkf/(br*2);
+
+    initial if (clk_div != $floor(clk_div)) $fatal(1, "clock divisor must be whole number");
+    initial if (clk_div == 0) $fatal(1, "clock divisor must be >0");
+    
+    localparam CLK_DIV = clk_div;
+endgenerate
+
 reg [$clog2(CLK_DIV)-1:0] counter = 0;
-reg int_bclk;
+reg int_bclk = 0;
 
 always @(posedge clk or posedge reset) begin
     if (reset) begin
