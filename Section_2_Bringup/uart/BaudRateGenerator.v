@@ -26,7 +26,7 @@ endgenerate
 reg [$clog2(CLK_DIV)-1:0] counter = 0;
 reg int_bclk = 0;
 
-always @(posedge clk or posedge reset) begin
+always @(posedge clk) begin
     if (reset) begin
         counter <= 0;
         int_bclk <= 0;
