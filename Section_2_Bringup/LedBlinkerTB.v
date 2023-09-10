@@ -1,0 +1,36 @@
+// iverilog -o led_blinker_tb.vvp led_blinker.v led_blinker_tb.v
+// vvp led_blinker_tb.vvp 
+
+`timescale 1ns/1ns
+
+module LedBlinkerTB;
+
+// timescale dependent
+parameter CLOCK_FREQ     = 1000000;
+parameter DURATION       = 1e9;
+parameter NUM_BLINKS     = 100;
+
+reg reset, clk = 0;
+wire led;
+integer num_blinks = 0, prev_led = 0;
+LedBlinker #(.PERIOD(CLOCK_FREQ/(NUM_BLINKS*2+1))) u0 (
+    .clk(clk),
+    .reset(reset),
+    .led(led));
+
+always begin
+    #(1e9/(CLOCK_FREQ*2)) clk = ~clk;
+    if (prev_led != led) begin
+        prev_led = led;
+        if (led == 1) num_blinks++;
+    end;
+end
+
+initial begin
+    reset = 1;
+    #10 reset = 0;
+    #DURATION if (num_blinks !== NUM_BLINKS) $fatal(1,"FAILED");
+    $display("PASSED"); $finish;
+end
+
+endmodule
