@@ -7,7 +7,7 @@ module LedBlinkerTB;
 
 // timescale dependent
 parameter CLOCK_FREQ     = 100;
-parameter DURATION       = 64e9;
+parameter DURATION       = 64e9; // must be atleast a second (HZ is /s and floats dont exist here)
 parameter NUM_BLINKS     = 100;
 
 reg reset, clk = 0;
