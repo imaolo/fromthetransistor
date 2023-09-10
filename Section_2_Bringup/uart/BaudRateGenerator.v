@@ -1,6 +1,5 @@
 module BaudRateGenerator#(parameter BR=0, parameter CLKF=0)(
-    input clk,
-    input reset,
+    input clk, reset,
     output wire bclk
 );
 
