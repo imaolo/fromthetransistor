@@ -1,5 +1,5 @@
-// iverilog -o BaudRateGenerator.vvp BaudRateGenerator.v BaudRateGenerator_TB.v
-// vvp BaudRateGenerator.vvp 
+// iverilog -o BaudRateGenerator_TB.vvp BaudRateGenerator.v BaudRateGenerator_TB.v
+// vvp BaudRateGenerator_TB.vvp 
 
 `timescale 1ns/1ns
 
