@@ -11,7 +11,7 @@ generate
 endgenerate
 
 localparam CLK_DIV = CLKF / (BR*2);
-integer counter = 0;
+reg [$clog2(CLK_DIV)-1:0] counter = 0;
 reg int_bclk;
 
 always @(posedge clk or posedge reset) begin
