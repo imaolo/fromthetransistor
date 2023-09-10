@@ -20,7 +20,7 @@ always @(posedge clk or posedge reset) begin
         int_bclk = 0;
     end else if (counter == CLK_DIV-1) begin
         counter = 0;
-        int_bclk = ~bclk;
+        int_bclk = ~int_bclk;
     end else counter = counter + 1;
 end
 
