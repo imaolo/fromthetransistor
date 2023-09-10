@@ -18,11 +18,13 @@ always @(posedge clk or posedge reset) begin
     if (reset) begin
         counter <= 0;
         int_bclk <= 0;
-    end else if (counter == CLK_DIV-1) begin
-        counter <= 0;
-        int_bclk <= ~int_bclk;
-    end else counter <= counter + 1;
-    if (counter >= CLK_DIV) $fatal(1, "counter overflow!");
+    end else begin
+        if (counter >= CLK_DIV) $fatal(1, "counter overflow!");
+        else if (counter == CLK_DIV-1) begin
+            counter <= 0;
+            int_bclk <= ~int_bclk;
+        end else counter <= counter + 1;
+    end
 end
 
 assign bclk = int_bclk;
