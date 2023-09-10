@@ -4,11 +4,9 @@ module BaudRateGenerator#(parameter BR=0, parameter CLKF=0)(
     output wire bclk
 );
 
-generate
-    if (BR == 0 || CLKF == 0) initial $fatal(1, "baud rate nor clock frequency can be 0");
-    if (CLKF < BR*2) initial $fatal(1, "clock frequency must be atleast double the baud rate");
-    if (CLKF%(BR*2) != 0) initial $fatal(1, "The clock divisor must a whole number");
-endgenerate
+if (BR == 0 || CLKF == 0) initial $fatal(1, "baud rate nor clock frequency can be 0");
+if (CLKF < BR*2) initial $fatal(1, "clock frequency must be atleast double the baud rate");
+if (CLKF%(BR*2) != 0) initial $fatal(1, "The clock divisor must a whole number");
 
 localparam CLK_DIV = CLKF / (BR*2);
 reg [$clog2(CLK_DIV)-1:0] counter = 0;
