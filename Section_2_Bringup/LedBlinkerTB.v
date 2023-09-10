@@ -6,14 +6,14 @@
 module LedBlinkerTB;
 
 // timescale dependent
-parameter CLOCK_FREQ     = 1000000;
-parameter DURATION       = 1e9;
+parameter CLOCK_FREQ     = 100;
+parameter DURATION       = 64e9;
 parameter NUM_BLINKS     = 100;
 
 reg reset, clk = 0;
 wire led;
 integer num_blinks = 0, prev_led = 0;
-LedBlinker #(.PERIOD(CLOCK_FREQ/(NUM_BLINKS*2+1))) u0 (
+LedBlinker #(.PERIOD((DURATION/1e9)*(CLOCK_FREQ/(NUM_BLINKS*2+1)))) u0 (
     .clk(clk),
     .reset(reset),
     .led(led));
