@@ -1,4 +1,4 @@
-// iverilog -o LedBlinker_TB.vvp LedBlinker.v LedBlinkerTB.v
+// iverilog -o LedBlinker_TB.vvp LedBlinker.v LedBlinker_TB.v
 // vvp LedBlinker_TB.vvp 
 
 `timescale 1ns/1ns
