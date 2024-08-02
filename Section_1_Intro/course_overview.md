@@ -45,7 +45,7 @@ boolean equations. Consider:
 <div>
     <figure>
         <img src="./truth_table.jpeg" width=50%>
-     <figcaption>https://nandland.com/lesson-4-what-is-a-look-up-table-lut/</figcaption>
+     <figcaption>unconfigurable LUT</figcaption>
     <gig>
 </div>
 
@@ -55,7 +55,7 @@ A reconfigurable LUT is one that can change its truth table. These are usually i
 
 <figure>
     <img src="./lut.png" width=30%>
-    <figcaption>LUT</figcaption>
+    <figcaption>configurable LUT</figcaption>
 </figure>
 
 Then, decoders and memory can be implemented in boolean logic (and thus using transistors):
