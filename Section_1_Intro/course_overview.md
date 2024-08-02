@@ -46,7 +46,6 @@ boolean equations. Consider:
     <figure>
         <img src="./truth_table.jpeg" width=50%>
      <figcaption>unconfigurable LUT</figcaption>
-    <gig>
 </div>
 
 But, the above LUT is not reconfigurable, meaning we cannot change what inputs map to what outputs.
