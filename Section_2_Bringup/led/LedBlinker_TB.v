@@ -1,5 +1,5 @@
-// iverilog -o LedBlinker_TB.vvp LedBlinker.v LedBlinker_TB.v
-// vvp LedBlinker_TB.vvp 
+// iverilog -o LedBlinker_tb.vvp LedBlinker.v LedBlinker_tb.v
+// vvp LedBlinker_tb.vvp 
 
 module LEDBlinker_tb();
     /* Test parameters */
