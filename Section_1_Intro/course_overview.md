@@ -16,7 +16,7 @@ Because one gate controls current through the other two gates, transistors can b
 
 <div style="display: flex; justify-content: space-between;">
     <figure>
-        <img src="https://www.elprocus.com/wp-content/uploads/CMOS-Inverter-Circuit.png" width=50%>
+        <img src="./not.png" width=50%>
         <figcaption>NOT</figcaption>
         <p>
             Vin high closes the PMOS gate and opens the NMOS gate. The result is that Vout is tied to ground. Vin low opens the PMOS gate and close the NMOS gates. Vout is then tied to high and shutoff from ground.
@@ -44,7 +44,7 @@ boolean equations. Consider:
 
 <div>
     <figure>
-        <img src="./truth_table.jpeg" width=400>
+        <img src="./truth_table.jpeg" width=50%>
      <figcaption>https://nandland.com/lesson-4-what-is-a-look-up-table-lut/</figcaption>
     <gig>
 </div>
@@ -54,19 +54,19 @@ But, the above LUT is not reconfigurable, meaning we cannot change what inputs m
 A reconfigurable LUT is one that can change its truth table. These are usually implemented with a decoder or multiplexer and a set of memory cells. To configure an LUT of this type, the memory cells are overwritten.
 
 <figure>
-    <img src="https://www.researchgate.net/publication/254060327/figure/fig1/AS:616476935483392@1523990963075/A-two-input-lookup-table-LUT.png" width=400>
+    <img src="./lut.png" width=50%>
     <figcaption>LUT</figcaption>
 </figure>
 
 Then, decoders and memory can be implemented in boolean logic (and thus using transistors):
 
 <figure>
-    <img src="./sram-bool.jpg" width=400>
+    <img src="./sram-bool.jpg" width=50%>
     <figcaption>SRAM cell</figcaption>
 </figure>
 
 <figure style="background-color: white; display: inline-block; margin: auto;">
-    <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/combination-comb44.gif">
+    <img src="./decoder.gif" width=50%>
 </figure>
 <p>Decoder</p>
 
