@@ -23,7 +23,7 @@ Because one gate controls current through the other two gates, transistors can b
         </p>
     </figure>
     <figure>
-        <img src="https://i.stack.imgur.com/LOYtw.png" width="200">
+        <img src="https://raw.githubusercontent.com/imaolo/fromthetransistor/master/Section_1_Intro/and_gate.png" width="200">
         <figcaption>AND</figcaption>
         <p>
             If either A or B is low, OUT will low as the PMOS gates will be open. Unless both A and B are high, the NMOS series will not allow current to Vout.
