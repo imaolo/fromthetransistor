@@ -66,7 +66,7 @@ Then, decoders and memory can be implemented in boolean logic (and thus using tr
 </figure>
 
 <figure style="background-color: white; display: inline-block; margin: auto;">
-    <img src="./decoder.gif" width=50%>
+    <img src="./decoder.gif">
 </figure>
 <p>Decoder</p>
 
