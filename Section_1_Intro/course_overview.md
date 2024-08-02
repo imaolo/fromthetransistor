@@ -23,7 +23,7 @@ Because one gate controls current through the other two gates, transistors can b
         </p>
     </figure>
     <figure>
-        <img src="https://raw.githubusercontent.com/imaolo/fromthetransistor/master/Section_1_Intro/and_gate.png" width="200">
+        <img src="./and_gate.png" width="200">
         <figcaption>AND</figcaption>
         <p>
             If either A or B is low, OUT will low as the PMOS gates will be open. Unless both A and B are high, the NMOS series will not allow current to Vout.
@@ -44,7 +44,7 @@ boolean equations. Consider:
 
 <div>
     <figure>
-        <img src="https://raw.githubusercontent.com/imaolo/fromthetransistor/master/Section_1_Intro/truth_table.jpeg" width=400>
+        <img src="./truth_table.jpeg" width=400>
      <figcaption>https://nandland.com/lesson-4-what-is-a-look-up-table-lut/</figcaption>
     <gig>
 </div>
@@ -61,7 +61,7 @@ A reconfigurable LUT is one that can change its truth table. These are usually i
 Then, decoders and memory can be implemented in boolean logic (and thus using transistors):
 
 <figure>
-    <img src="https://raw.githubusercontent.com/imaolo/fromthetransistor/master/Section_1_Intro/sram-bool.jpg" width=400>
+    <img src="./sram-bool.jpg" width=400>
     <figcaption>SRAM cell</figcaption>
 </figure>
 
