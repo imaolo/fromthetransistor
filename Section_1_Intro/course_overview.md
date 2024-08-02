@@ -69,7 +69,6 @@ Then, decoders and memory can be implemented in boolean logic (and thus using tr
     <img src="./decoder-1.jpg", width=50%>
     <figcaption>Decoder</figcaption>
 </figure>
-<p>Decoder</p>
 
 
 The second fundamental component of FPGAs are reconfigurable innterconnects.
