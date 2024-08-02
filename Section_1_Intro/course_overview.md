@@ -16,14 +16,14 @@ Because one gate controls current through the other two gates, transistors can b
 
 <div style="display: flex; justify-content: space-between;">
     <figure>
-        <img src="./not.png" width=30%>
+        <img src="./not.png" width=25%>
         <figcaption>NOT</figcaption>
         <p>
             Vin high closes the PMOS gate and opens the NMOS gate. The result is that Vout is tied to ground. Vin low opens the PMOS gate and close the NMOS gates. Vout is then tied to high and shutoff from ground.
         </p>
     </figure>
     <figure>
-        <img src="./and_gate.png" width=30%>
+        <img src="./and_gate.png" width=25%>
         <figcaption>AND</figcaption>
         <p>
             If either A or B is low, OUT will low as the PMOS gates will be open. Unless both A and B are high, the NMOS series will not allow current to Vout.
