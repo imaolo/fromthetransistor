@@ -16,14 +16,14 @@ Because one gate controls current through the other two gates, transistors can b
 
 <div style="display: flex; justify-content: space-between;">
     <figure>
-        <img src="https://www.elprocus.com/wp-content/uploads/CMOS-Inverter-Circuit.png" width="200">
+        <img src="https://www.elprocus.com/wp-content/uploads/CMOS-Inverter-Circuit.png" width=50%>
         <figcaption>NOT</figcaption>
         <p>
             Vin high closes the PMOS gate and opens the NMOS gate. The result is that Vout is tied to ground. Vin low opens the PMOS gate and close the NMOS gates. Vout is then tied to high and shutoff from ground.
         </p>
     </figure>
     <figure>
-        <img src="./and_gate.png" width="200">
+        <img src="./and_gate.png" width=50%>
         <figcaption>AND</figcaption>
         <p>
             If either A or B is low, OUT will low as the PMOS gates will be open. Unless both A and B are high, the NMOS series will not allow current to Vout.
@@ -65,10 +65,10 @@ Then, decoders and memory can be implemented in boolean logic (and thus using tr
     <figcaption>SRAM cell</figcaption>
 </figure>
 
-<figure style="background-color: white; display: inline-block; margin: 0;">
-    <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/combination-comb44.gif" width=400>
-    <figcaption>Decoder</figcaption>
+<figure style="background-color: white; display: inline-block; margin: auto;">
+    <img src="https://www.electronics-tutorials.ws/wp-content/uploads/2018/05/combination-comb44.gif">
 </figure>
+<p>Decoder</p>
 
 
 The second fundamental component of FPGAs are reconfigurable innterconnects.
