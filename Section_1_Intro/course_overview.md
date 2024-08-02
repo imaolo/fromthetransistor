@@ -16,14 +16,14 @@ Because one gate controls current through the other two gates, transistors can b
 
 <div style="display: flex; justify-content: space-between;">
     <figure>
-        <img src="./not.png" width=25%>
+        <img src="./not.png" width=30%>
         <figcaption>NOT</figcaption>
         <p>
             Vin high closes the PMOS gate and opens the NMOS gate. The result is that Vout is tied to ground. Vin low opens the PMOS gate and close the NMOS gates. Vout is then tied to high and shutoff from ground.
         </p>
     </figure>
     <figure>
-        <img src="./and_gate.png" width=25%>
+        <img src="./and_gate.png" width=30%>
         <figcaption>AND</figcaption>
         <p>
             If either A or B is low, OUT will low as the PMOS gates will be open. Unless both A and B are high, the NMOS series will not allow current to Vout.
@@ -54,7 +54,7 @@ But, the above LUT is not reconfigurable, meaning we cannot change what inputs m
 A reconfigurable LUT is one that can change its truth table. These are usually implemented with a decoder or multiplexer and a set of memory cells. To configure an LUT of this type, the memory cells are overwritten.
 
 <figure>
-    <img src="./lut.png" width=50%>
+    <img src="./lut.png" width=30%>
     <figcaption>LUT</figcaption>
 </figure>
 
@@ -65,8 +65,9 @@ Then, decoders and memory can be implemented in boolean logic (and thus using tr
     <figcaption>SRAM cell</figcaption>
 </figure>
 
-<figure style="background-color: white; display: inline-block; margin: auto;">
-    <img src="./decoder.gif">
+<figure>
+    <img src="./decoder-1.jpg", width=50%>
+    <figcaption>Decoder</figcaption>
 </figure>
 <p>Decoder</p>
 
