@@ -13,19 +13,19 @@ module uart(
     output[7:0] dout
 );
 
-receiver r(
-    .rx(rx),
-    .clk(clk),
-    .rdy(rd_rdy),
-    .data(dout)
-);
+    receiver r(
+        .rx(rx),
+        .clk(clk),
+        .rdy(rd_rdy),
+        .data(dout)
+    );
 
-transmitter t(
-    .data(din),
-    .clk(clk),
-    .write_en(wr_en),
-    .rdy(wr_rdy),
-    .tx(tx)
-);
+    transmitter t(
+        .data(din),
+        .clk(clk),
+        .write_en(wr_en),
+        .rdy(wr_rdy),
+        .tx(tx)
+    );
 
 endmodule
