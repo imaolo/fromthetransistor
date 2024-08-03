@@ -22,14 +22,16 @@ module receiver(
 
     /* state machine */
     always @(posedge clk) begin
-        if (!en)
+        if (!en) begin
             state <= s_IDLE;
+            data <= 0;
+        end
         else begin
             case (state)
                 s_IDLE: begin
+                    rdy <= 0;
                     if (!x) begin
                         state <= s_READ;
-                        rdy <= 0;
                     end
                 end
                 s_READ: begin
