@@ -25,9 +25,9 @@ module transmitter_tb();
 
     /* start test */
     initial begin
-        if (!tx)
+        if (!tx || tx === 1'bz)
             $fatal(1, "tx should be idling");
-        if (!rdy)
+        if (!rdy || rdy === 1'bz)
             $fatal(1, "tx should be ready");
 
         /* lets begin transmission */
@@ -36,15 +36,15 @@ module transmitter_tb();
     
         /* go to start state */
         #4
-        if (rdy)
+        if (rdy || rdy === 1'bz)
             $fatal(1, "tx should not be ready");
-        if (tx)
+        if (tx || tx === 1'bz)
             $fatal(1, "should be reading the start bit");
         
         /* transmit all the bits and test */
         for (i = 0; i<8; i++) begin
             #2
-            if (tx != data[i])
+            if (tx != data[i] || tx === 1'bz)
                 $fatal(1, "incorrect bit %d", i);
         end
 
@@ -53,21 +53,21 @@ module transmitter_tb();
 
         /* check the stop bit */
         #2
-        if (!tx)
+        if (!tx || tx === 1'bz)
             $fatal(1, "stop bit should be high");
 
         /* shouldnt be ready yet */
-        if (rdy)
+        if (rdy || rdy === 1'bz)
             $fatal(1, "shouldnt be ready yet");
 
         /* back to idle */
         #2
-        if (!rdy)
+        if (!rdy || rdy === 1'bz)
             $fatal(1, "should be ready");
 
         /* test idle */
         for (i = 0; i<20; i++)
-            #1 if (!tx) $fatal(1, "improper idle");
+            #1 if (!tx || tx === 1'bz) $fatal(1, "improper idle");
 
         $finish(0);
     
