@@ -5,52 +5,77 @@ module uart_tb();
     /* define the clock */
     reg  clk = 0;
 
-    /* some test vars */
+    /* test vars */
     reg[7:0] data;
     integer i;
 
-    /* declare uart1 */
+    /* controls */
+    reg wr_en1 = 0;
+    reg wr_en2 = 0;
+    reg rd_en1 = 0;
+    reg rd_en2 = 0;
+
+    /* statuses */
+    wire rd_rdy1;
+    wire rd_rdy2;
+    wire wr_rdy1;
+    wire wr_rdy2;
+
+    /* serial signals */
+    wire rx1;
+    wire rx2;
+    wire tx1;
+    wire tx2;
+
+    /* buffers */
     reg[7:0]  din1 = 0;
+    reg[7:0]  din2 = 0;
     wire[7:0] dout1;
-    reg       wr_en1 = 0;
-    reg       rd_en1 = 0;
-    wire      rx1;
-    wire      rd_rdy1;
-    wire      wr_rdy1;
-    wire      tx1;
+    wire[7:0] dout2;
+
+    /* declare uarts */
+
     uart u1 (
-        .din(din1),
         .clk(clk),
+
+        /* controls */
         .wr_en(wr_en1),
         .rd_en(rd_en1),
-        .rx(rx1),
-        .tx(tx1),
+
+        /* buffers */
+        .din(din1),
+        .dout(dout1),
+
+        /* signals */
         .rd_rdy(rd_rdy1),
         .wr_rdy(wr_rdy1),
-        .dout(dout1)
+
+        /* serial signals */
+        .rx(rx1),
+        .tx(tx1)
     );
 
-    /* declare uart2 */
-    reg[7:0]  din2 = 0;
-    wire[7:0] dout2;
-    reg       wr_en2 = 0;
-    reg       rd_en2 = 0;
-    wire      rx2;
-    wire      rd_rdy2;
-    wire      wr_rdy2;
-    wire      tx2;
     uart u2 (
-        .din(din2),
         .clk(clk),
+
+        /* controls */
         .wr_en(wr_en2),
         .rd_en(rd_en2),
-        .rx(rx2),
-        .tx(tx2),
+
+        /* buffers */
+        .din(din2),
+        .dout(dout2),
+
+        /* signals */
         .rd_rdy(rd_rdy2),
         .wr_rdy(wr_rdy2),
-        .dout(dout2)
+
+        /* serial signals */
+        .rx(rx2),
+        .tx(tx2)
     );
 
+    /* tie serial signals */
     assign rx1 = tx2;
     assign rx2 = tx1;
 
@@ -68,7 +93,6 @@ initial begin
         $fatal(1, "1. dout2 should be low - %b", dout2);
     if (dout2 === 8'bz)
         $fatal(1, "2. dout2 should be low - %b", dout2);
-
 
     /* lets transmit some data */
 
