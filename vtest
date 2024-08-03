@@ -1,0 +1,10 @@
+#!/bin/bash
+
+find . -type f -name "$1" -execdir sh -c '
+    for file_path; do
+        echo "compiling: $file_path"
+        bin_file_path="${file_path%.*}.vvp"
+        iverilog -o $bin_file_path $file_path
+        vvp $bin_file_path
+    done;
+' sh {} +
