@@ -40,7 +40,7 @@ module receiver(
                     if (read_count >= 8) begin
                         state <= s_IDLE;
                         rdy <= 1;
-                        read_count <= 0;
+                        read_count = 0;
                     end
                 end
             endcase

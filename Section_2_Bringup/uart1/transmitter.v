@@ -32,7 +32,7 @@ module transmitter(
             s_START: begin
                 rdy <= 0;
                 tx <= 0;
-                write_cnt <= 0;
+                write_cnt = 0;
                 state <= s_WRITE;
             end
             s_WRITE: begin
@@ -45,7 +45,7 @@ module transmitter(
             end
             s_STOP: begin
                 tx <= 1;
-                write_cnt <= 0;
+                write_cnt = 0;
                 state <= s_IDLE;
             end    
         endcase
