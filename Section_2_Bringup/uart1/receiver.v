@@ -1,8 +1,9 @@
 module receiver(
-    input           rx,     /* serial in */
-    input           clk,    /* clk signal */
-    output reg      rdy,   /* ready for read */  
-    output reg[7:0] data   /* data out */
+    input           x,    /* serial in */
+    input           clk,  /* clk signal */
+    input           en,   /* enabled read */
+    output reg      rdy,  /* ready for read */  
+    output reg[7:0] data  /* data out */
 );
 
     /* states */
@@ -16,30 +17,34 @@ module receiver(
     end
 
     /* internal registers*/
-    reg      state    = s_IDLE;
-    integer  read_cnt = 0;
+    reg     state      = s_IDLE;
+    integer read_count = 0;
 
     /* state machine */
     always @(posedge clk) begin
-        case (state)
-            s_IDLE: begin
-                if (rx == 0) begin
-                    state <= s_READ;
-                    read_cnt <= 0;
+        if (!en)
+            state <= s_IDLE;
+        else begin
+            case (state)
+                s_IDLE: begin
+                    if (!x) begin
+                        state <= s_READ;
+                        rdy <= 0;
+                    end
                 end
-            end
-            s_READ: begin
-                if (read_cnt < 8) begin
-                    rdy <= 0;
-                    data <= {data[6:0], rx};
-                    read_cnt++;
+                s_READ: begin
+                    if (read_count < 8) begin
+                        data <= {data[6:0], x};
+                        read_count++;
+                    end
+                    if (read_count >= 8) begin
+                        state <= s_IDLE;
+                        rdy <= 1;
+                        read_count <= 0;
+                    end
                 end
-                if (read_cnt >= 8) begin 
-                    rdy <= 1;
-                    state <= s_IDLE;
-                end;
-            end
-        endcase
+            endcase
+        end
     end
 
 endmodule
