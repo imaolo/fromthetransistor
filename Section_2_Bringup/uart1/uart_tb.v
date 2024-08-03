@@ -93,6 +93,28 @@ initial begin
         #2;
     if (dout2 != din1)
         $fatal(1, "failed - %b - %b", dout2, din1);
+
+    /* transmit and receive */
+    din1 = 8'b11001010;
+    din2 = 8'b01001011;
+    wr_en1 = 1;
+    wr_en2 = 1;
+    rd_en1 = 1;
+    rd_en2 = 1;
+    // TODO - some work needed with the control signals
+    while (rd_rdy1 == 0 || rd_rdy2 == 0) begin
+        #2;
+        if (rd_rdy1 == 1) begin
+            wr_en2 = 0;
+        end;
+        if (rd_rdy2 == 1) begin
+            wr_en1 = 0;
+        end;
+    end
+    if (dout2 != din1)
+        $fatal(1, "failed(1) - %b - %b", dout2, din1);
+    if (dout1 != din2)
+        $fatal(1, "failed(2) - %b - %b", dout1, din2);
     $finish(0);
 end;
 
