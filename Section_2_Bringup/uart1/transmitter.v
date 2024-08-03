@@ -14,11 +14,11 @@ module transmitter(
     /* initialize output signals */
     initial begin
         rdy = 1;
-        tx <= 1;
+        tx = 1;
     end
 
     /* internal registers */
-    reg[7:0]  write_cnt = 0;
+    reg[2:0]  write_idx = 0;
     reg[1:0]  state     = s_IDLE;
 
     always @(posedge clk) begin
@@ -32,20 +32,19 @@ module transmitter(
             s_START: begin
                 rdy <= 0;
                 tx <= 0;
-                write_cnt = 0;
+                write_idx <= 0;
                 state <= s_WRITE;
             end
             s_WRITE: begin
-                if (write_cnt < 8) begin
-                    tx <= data[write_cnt];
-                    write_cnt++;
-                end
-                if (write_cnt >=8)
+                tx <= data[write_idx];
+                if (write_idx == 7)
                     state <= s_STOP;
+                else
+                    write_idx <= write_idx + 1;
             end
             s_STOP: begin
                 tx <= 1;
-                write_cnt = 0;
+                write_idx <= 0;
                 state <= s_IDLE;
             end    
         endcase
