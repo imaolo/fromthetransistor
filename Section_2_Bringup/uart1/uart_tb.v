@@ -89,30 +89,38 @@ initial begin
     din1 = 8'b11101000;
     wr_en1 = 1;
     rd_en2 = 1;
-    while (u2.rd_rdy == 0)
+    while (!u2.rd_rdy)
         #2;
     if (u2.dout != din1)
         $fatal(1, "failed - %b - %b", dout2, din1);
 
     /* transmit and receive */
-    din1 = 8'b11001010;
-    din2 = 8'b01001011;
+
+    /* wait for write ready */
+    while (!u1.wr_rdy || !u2.wr_rdy)
+        #2;
+
+    /* confiure controls */
     wr_en1 = 1;
     wr_en2 = 1;
     rd_en1 = 1;
     rd_en2 = 1;
-    #6 // TODO - we need 3 cycles for the receiver to get back to s_READ (read_ready = 0)
-    while (u1.rd_rdy == 0 || u2.rd_rdy == 0) begin
+
+    /* send data */
+    din1 = 8'b11001010;
+    din2 = 8'b01001011;
+
+    /* wait for data to be received */
+    while (!u1.rd_rdy) begin
         #2;
-        if (u1.rd_rdy == 1) begin
-            wr_en2 = 0;
-            rd_en1 = 0;
-        end;
-        if (u2.rd_rdy == 1) begin
-            wr_en1 = 0;
-            rd_en2 = 0;
-        end;
     end
+    rd_en1 = 0;
+    while (!u2.rd_rdy) begin
+        #2;
+    end
+    rd_en2 = 0;
+
+    /* verify data */
     if (u2.dout != din1)
         $fatal(1, "failed(1) - %b - %b", u2.dout, din1);
     if (u1.dout != din2)
