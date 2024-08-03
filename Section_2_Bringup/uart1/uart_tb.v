@@ -1,6 +1,4 @@
-// iverilog -o uart_tb.vvp uart.v uart_tb.v
-// vvp uart_tb.vvp 
-
+`include "uart.v"
 
 module uart_tb();
 
