@@ -1,13 +1,13 @@
 `include "transmitter.v"
 
-module reciever_tb();
+module receiver_tb();
 
     /* instantiate the transmitter */
     reg rx = 1;
     reg clk = 0;
     wire rdy;
     wire[7:0] out_data;
-    reciever t (
+    receiver t (
         .rx(rx),
         .clk(clk),
         .rdy(rdy),
@@ -22,7 +22,7 @@ module reciever_tb();
         if (out_data != 0)
             $fatal(1, "1. failed - %d", out_data);
 
-        /* put the reciever in read mode */
+        /* put the receiver in read mode */
         rx = 0;
         #2
 

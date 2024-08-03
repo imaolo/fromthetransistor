@@ -1,4 +1,4 @@
-module reciever(
+module receiver(
     input           rx,     /* serial in */
     input           clk,    /* clk signal */
     output reg      rdy,   /* ready for read */  
