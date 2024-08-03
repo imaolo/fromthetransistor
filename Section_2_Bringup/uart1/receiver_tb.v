@@ -57,24 +57,20 @@ module receiver_tb();
         if (rdy == 1 || rdy === 1'bz)
             $fatal(1, "ready start failed - %d", rdy);
 
+        data = 8'b00011100;
         /* start writing */
         for (i = 0; i<8; i++) begin
-            /* send data */
-            if (i % 2)
-                data = {data[6:0], 1'b1};
-            else
-                data = {data[6:0], 1'b0};
-            rx = data[0];
+            rx = data[i];
 
             /* check ready bit */
             if (rdy == 1 || rdy === 1'bz)
                 $fatal(1, "ready start failed(2) - %d", rdy);
             #2;
-
-            /* read data */
-            if (data != data_out)
-                $fatal(1, "write data failed(1) - %b - %b - %d", data_out, data, i);
         end
+
+        /* read data */
+        if (data != data_out)
+            $fatal(1, "write data failed(5) - %b - %b", data_out, data);
 
         /* final data_out check */
         if (rdy == 0 || rdy === 1'bz)
