@@ -8,6 +8,8 @@ module uart_tb();
     /* test vars */
     reg[7:0] data;
     integer i;
+    reg rdy1;
+    reg rdy2;
 
     /* controls */
     reg wr_en1 = 0;
@@ -96,8 +98,8 @@ initial begin
 
     /* transmit and receive */
 
-    /* wait for write ready */
-    while (!u1.wr_rdy || !u2.wr_rdy)
+    /* wait for write ready and read not ready*/
+    while (!u1.wr_rdy || !u2.wr_rdy || u1.rd_rdy || u2.rd_rdy)
         #2;
 
     /* confiure controls */
@@ -110,22 +112,28 @@ initial begin
     din1 = 8'b11001010;
     din2 = 8'b01001011;
 
-    /* wait for data to be received */
-    while (!u1.rd_rdy) begin
-        #2;
+    /* wait for data to be received (ready signals go high for single cycle) */
+    rdy1 = u1.rd_rdy;
+    rdy2 = u2.rd_rdy;
+    while (!rdy1 || !rdy2) begin
+        #2
+        if (u1.rd_rdy) begin
+            rdy1 = 1;
+            rd_en1 = 0;
+        end;
+
+        if (u2.rd_rdy) begin
+            rdy2 = 1;
+            rd_en2 = 0;
+        end
     end
-    rd_en1 = 0;
-    while (!u2.rd_rdy) begin
-        #2;
-    end
-    rd_en2 = 0;
 
     /* verify data */
     if (u2.dout != din1)
         $fatal(1, "failed(1) - %b - %b", u2.dout, din1);
     if (u1.dout != din2)
         $fatal(1, "failed(2) - %b - %b", u1.dout, din2);
-    $finish(0);
+    $finish(1);
 end;
 
 endmodule
