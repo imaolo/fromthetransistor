@@ -101,6 +101,7 @@ initial begin
     wr_en2 = 1;
     rd_en1 = 1;
     rd_en2 = 1;
+    // TODO - this syntax works uut.a = 0;
     // TODO - some work needed with the control signals
     while (rd_rdy1 == 0 || rd_rdy2 == 0) begin
         #2;
