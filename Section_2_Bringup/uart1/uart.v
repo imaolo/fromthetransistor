@@ -1,4 +1,5 @@
-
+`include "transmitter.v"
+`include "receiver.v"
 
 module uart(
     input[7:0]  din,
@@ -12,14 +13,14 @@ module uart(
     output[7:0] dout
 );
 
-uart_rx urx(
+receiver r(
     .rx(rx),
     .clk(clk),
     .rdy(rd_rdy),
     .data(dout)
 );
 
-uart_tx utx(
+transmitter t(
     .data(din),
     .clk(clk),
     .write_en(wr_en),
