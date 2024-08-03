@@ -50,7 +50,7 @@ module LEDBlinker_tb();
             if (num_toggles != expected_toggles)
                 $fatal(1,"FAILED num : %d, exp : %d", num_toggles, expected_toggles);
         end
-        $finish(0);
+        $finish;
     end
 
 endmodule;

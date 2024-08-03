@@ -69,7 +69,7 @@ module transmitter_tb();
         for (i = 0; i<20; i++)
             #1 if (!tx || tx === 1'bz) $fatal(1, "improper idle");
 
-        $finish(0);
+        $finish;
     
     end
 
