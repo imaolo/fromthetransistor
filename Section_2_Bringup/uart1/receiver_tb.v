@@ -1,4 +1,4 @@
-`include "transmitter.v"
+`include "receiver.v"
 
 module receiver_tb();
 
