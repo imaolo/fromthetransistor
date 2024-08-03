@@ -7,7 +7,7 @@ module receiver_tb();
     reg clk = 0;
     wire rdy;
     wire[7:0] out_data;
-    receiver t (
+    receiver r (
         .rx(rx),
         .clk(clk),
         .rdy(rdy),
