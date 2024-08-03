@@ -34,7 +34,7 @@ module receiver(
                 end
                 s_READ: begin
                     if (read_count < 8) begin
-                        data <= {data[6:0], x};
+                        data <= {x, data[7:1]};
                         read_count++;
                     end
                     if (read_count >= 8) begin
