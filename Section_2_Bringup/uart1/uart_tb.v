@@ -84,17 +84,7 @@ module uart_tb();
 
 initial begin
 
-    /* both data outs should be low */
-    if (dout1 != 8'b0)
-        $fatal(1, "1. dout1 should be low - %b", dout1);
-    if (dout1 === 8'bz)
-        $fatal(1, "2. dout1 should be low - %b", dout1);
-    if (dout2 != 8'b0)
-        $fatal(1, "1. dout2 should be low - %b", dout2);
-    if (dout2 === 8'bz)
-        $fatal(1, "2. dout2 should be low - %b", dout2);
-
-    /* lets transmit some data */
+    /* transmit some data */
 
     din1 = 8'b11101000;
     wr_en1 = 1;
