@@ -2,16 +2,22 @@
 
 module receiver_tb();
 
+    /* test vars */
+    integer  i;
+    reg[7:0] data = 0;
+
     /* instantiate the transmitter */
-    reg rx = 1;
-    reg clk = 0;
+    reg  rx      = 1;
+    reg  clk     = 0;
+    reg  read_en = 0;
     wire rdy;
-    wire[7:0] out_data;
+    wire[7:0] data_out;
     receiver r (
-        .rx(rx),
+        .x(rx),
         .clk(clk),
+        .en(read_en),
         .rdy(rdy),
-        .data(out_data)
+        .data(data_out)
     );
 
     /* start the clock */
@@ -19,58 +25,68 @@ module receiver_tb();
 
     /* start test */
     initial begin
-        if (out_data != 0 || out_data === 8'bz)
-            $fatal(1, "1. failed - %d", out_data);
 
-        /* put the receiver in read mode */
-        rx = 0;
-        #2
+        /* initialization tests */
 
-        /* write a bit */
+        if (data_out != 0 || data_out === 8'bz)
+            $fatal(1, "data init failed - %d", data_out);
+
+        if (rdy == 1 || rdy === 1'bz)
+            $fatal(1, "ready init failed - %d", data_out);
+
+        /* we can transmit all we want but we need to enable reading */
+        read_en = 0;
+        for (i = 0; i<40; i++) begin
+            #2 rx = i % 2;
+            if (data_out != 0 || data_out === 8'bz)
+                $fatal(1, "read disabled failed - %d", data_out);
+        end
+
+        /* enable reading but stay in idle mode */
+        read_en = 1;
         rx = 1;
-        #2
-        if (out_data != 1 || out_data === 8'bz)
-            $fatal(1, "2. failed - %d", out_data);
-
-        /* write the same bit some more */
-        #4
-        if (out_data != 7 || out_data === 8'bz)
-            $fatal(1, "3. failed - %d", out_data);
-
-        /* we should not be ready to read yet */
-        if (rdy || rdy === 1'bz)
-            $fatal(1, "4. failed");
-
-        /* lets write some zeros */
-        rx = 0;
-        #4
-        if (out_data != 8'b00011100 || out_data === 8'bz)
-            $fatal(1, "5. failed - %d", out_data);
-
-        /* finish it off */
-        #6
-        if (!rdy || rdy === 1'bz)
-            $fatal(1, "6. should be ready");
-        if (out_data != 8'b11100000  || out_data === 8'bz)
-            $fatal(1, "7. failed - %d", out_data);
-
-        /* should stay ready until we start reading again */
-        rx = 1; // idle
         #10
-        if (!rdy || rdy === 1'bz)
-            $fatal(1, "8. should be ready");
+        if (data_out != 0 || data_out === 8'bz)
+            $fatal(1, "data idle failed - %d", data_out);
+        if (rdy == 1 || rdy === 1'bz)
+            $fatal(1, "ready idle failed - %d", rdy);
 
-        /* should not be ready once we exit the idle state */
+        /* send the start bit */
         rx = 0;
         #2
-        rx = 1; // write a bit
-        #2
-        if (rdy || rdy === 1'bz)
-            $fatal(1, "9. should not be ready");
+        if (rdy == 1 || rdy === 1'bz)
+            $fatal(1, "ready start failed - %d", rdy);
 
-        /* even though we are not ready, we dont clear the buffer */
-        if (out_data != 8'b11000001 || out_data === 8'bz)
-            $fatal(1, "10. failed - %d", out_data);
+        /* start writing */
+        for (i = 0; i<8; i++) begin
+            /* send data */
+            if (i % 2)
+                data = {data[6:0], 1'b1};
+            else
+                data = {data[6:0], 1'b0};
+            rx = data[0];
+
+            /* check ready bit */
+            if (rdy == 1 || rdy === 1'bz)
+                $fatal(1, "ready start failed(2) - %d", rdy);
+            #2;
+
+            /* read data */
+            if (data != data_out)
+                $fatal(1, "write data failed(1) - %b - %b - %d", data_out, data, i);
+        end
+
+        /* final data_out check */
+        if (rdy == 0 || rdy === 1'bz)
+            $fatal(1, "ready finish failed(2) - %d", rdy);
+        if (data != data_out)
+            $fatal(1, "write data failed(2) - %b - %b", data_out, data);
+
+        /* send the start bit again */
+        rx = 0;
+        #2
+        if (rdy == 1 || rdy === 1'bz)
+            $fatal(1, "ready start failed(4) - %d", data_out);
 
         $finish(0);
     end
