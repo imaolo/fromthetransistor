@@ -14,8 +14,9 @@ module uart(
 );
 
     receiver r(
-        .rx(rx),
+        .x(rx),
         .clk(clk),
+        .en(rd_en),
         .rdy(rd_rdy),
         .data(dout)
     );
