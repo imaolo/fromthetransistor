@@ -1,13 +1,13 @@
 `include "transmitter.v"
 
-module transmitter_tb();
+module reciever_tb();
 
     /* instantiate the transmitter */
     reg rx = 1;
     reg clk = 0;
     wire rdy;
     wire[7:0] out_data;
-    transmitter t (
+    reciever t (
         .rx(rx),
         .clk(clk),
         .rdy(rdy),
