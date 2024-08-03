@@ -101,14 +101,16 @@ initial begin
     wr_en2 = 1;
     rd_en1 = 1;
     rd_en2 = 1;
-    // TODO - some work needed with the control signals
+    #6 // TODO - we need 3 cycles for the receiver to get back to s_READ (read_ready = 0)
     while (u1.rd_rdy == 0 || u2.rd_rdy == 0) begin
         #2;
         if (u1.rd_rdy == 1) begin
             wr_en2 = 0;
+            rd_en1 = 0;
         end;
         if (u2.rd_rdy == 1) begin
             wr_en1 = 0;
+            rd_en2 = 0;
         end;
     end
     if (u2.dout != din1)
