@@ -27,12 +27,6 @@ def write_wire(val:bool):
 def read_wire():
     return int(rx.read(1).decode())
 
-# testing
-for i in range(1000):
-    print(i)
-    write_wire(i)
-    read_wire()
-
 # get bitarray helper
 def bit_array(n) -> str:
     ret = []
@@ -56,16 +50,24 @@ def tick():
     write_wire(tx)
     uart_rx['rx'] = read_wire()
 
-# attemp to write a buffer
-# lets test it out
+# ECHO! Is anybody there???
 
-uart_tx['wr_en'] = 1
-uart_rx['rd_en'] = 1
-for bit_num in range(257):
-    uart_tx['din'] = bit_num
-    while uart_rx['rd_rdy'] == 0:
+print('\n\n', "-"*50, '\n\n')
+print("This is a (virtual) semihosting test. It uses virtual ports to test the verilog uart modules")
+
+while 1:
+    msg = input("what would you like to transmit?\n")
+    print(f"transmitting: {msg}")
+
+    msg_tx = msg.encode()
+    msg_rx = []
+    uart_tx['wr_en'] = 1 
+    uart_rx['rd_en'] = 1
+    for byte in msg_tx:
+        uart_tx['din'] = byte
+        while uart_rx['rd_rdy'] == 0:
+            tick()
         tick()
-    tick()
-    num_rx = int(uart_rx['dout'])
-    print(num_rx, bit_num)
-    assert num_rx == bit_num
+        msg_rx.append(chr(uart_rx['dout']))
+    msg_rx = ''.join(msg_rx)
+    print(f"message received: {msg_rx}")
