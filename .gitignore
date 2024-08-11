@@ -1,3 +1,5 @@
 *.vvp
 *.out
 obj_dir
+*.pyc
+.venv
