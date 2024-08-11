@@ -133,7 +133,8 @@ initial begin
         $fatal(1, "failed(1) - %b - %b", u2.dout, din1);
     if (u1.dout != din2)
         $fatal(1, "failed(2) - %b - %b", u1.dout, din2);
+    $display("finished");
     $finish;
-end;
+end
 
 endmodule
