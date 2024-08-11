@@ -84,6 +84,7 @@ module receiver_tb();
         if (rdy == 1 || rdy === 1'bz)
             $fatal(1, "ready start failed(4) - %d", data_out);
 
+        $display("finished");
         $finish;
     end
 
