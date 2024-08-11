@@ -78,8 +78,8 @@ module uart_tb();
     );
 
     /* tie serial signals */
-    assign u1.rx = u2.tx;
-    assign u2.rx = u1.tx;
+    assign rx1 = u2.tx;
+    assign rx2 = u1.tx;
 
     /* start the clock */
     initial forever #1 clk = ~clk;
